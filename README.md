@@ -1,1 +1,1 @@
-# richySky
+# richySky Game

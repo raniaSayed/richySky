@@ -1,29 +1,29 @@
 class Position
 {
-    constructor(x = 0, y = 0)
+    constructor(xPosition = 0, yPosition = 0)
     {
-        this.xPosition = x;
-        this.yPosition = y;
+        this.xPosition = xPosition;
+        this.yPosition = yPosition;
     }
 
-    set x(x)
+    set xPosition(x)
     {
-        this.xPosition = x;
+        this._xPosition = x;
     }
 
-    set y(y)
+    set yPosition(y)
     {
-        this.yPosition = y;
+        this._yPosition = y;
     }
 
 
-    get x()
+    get xPosition()
     {
-        return this.xPosition;
+        return this._xPosition;
     }
 
-    get y()
+    get yPosition()
     {
-        return this.yPosition;
+        return this._yPosition;
     }
 }

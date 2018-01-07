@@ -1,30 +1,30 @@
-var coin = document.getElementById("coin");
+var regularcoin = document.getElementById("coin");
 var dollarCoin = document.getElementById("dollarCoin");
-coin.style.right="10px";
+regularcoin.style.right="10px";
 rotate  = 0;
 flag = 0;
 var x=0;
 var intervalID;
-coin.addEventListener("mouseenter",function(){
+regularcoin.addEventListener("mouseenter",function(){
     if(!flag){
     var intervalID = setInterval(function () {
         // Your logic here
         rotate += 20;
-        coin.style.WebkitTransform = "rotate("+rotate+"deg)"; 
+        regularcoin.style.WebkitTransform = "rotate("+rotate+"deg)"; 
         flag =1;
         if (x++ === 18) {
             console.log(x);
             window.clearInterval(intervalID);
-             coin.style.WebkitTransform = "rotate(0deg)";
+             regularcoin.style.WebkitTransform = "rotate(0deg)";
             flag = 0;
             x = 0;
         }
      }, 100);
 }
 });
-coin.addEventListener("mouseleave",function(){
+regularcoin.addEventListener("mouseleave",function(){
      window.clearInterval(intervalID);
-    coin.style.WebkitTransform = "rotate(0deg)";
+    regularcoin.style.WebkitTransform = "rotate(0deg)";
 
 });
 dollarCoin.style.right="10px";
@@ -77,7 +77,7 @@ bottom=0;
 
 		   // Your logic here
  		char.style.bottom = (bottom+=5)+"%";
-        coin.style.WebkitTransform = "rotate("+rotate+"deg)"; 
+        regularcoin.style.WebkitTransform = "rotate("+rotate+"deg)"; 
         rotate+=20;
 
 

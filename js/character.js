@@ -44,7 +44,7 @@ class Character {
         this.character.style.bottom = this.location.yPosition + 'px';
     }
 
-    down() {
+    fall() {
         this.location.yPosition -= 4;
         this.character.style.bottom = this.location.yPosition + 'px';
     }
@@ -96,7 +96,7 @@ class Character {
                                 this.jumpInterval = undefined;
                                 return;
                             }
-                            this.down();
+                            this.fall();
                         }, 5);
                     }
                     this.jump();

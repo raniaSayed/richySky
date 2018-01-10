@@ -7,7 +7,7 @@
   margin-left: 300px;
   border-color: white;
   border-color:black;
-  background-image: url(imgs/wood.jpg);
+  background-image: url(../img/wood.jpg);
   display: none;
 }
 #boardStairs{
@@ -19,7 +19,7 @@
     border-style: solid;
     border-width: 1px;
     border-radius: 20px;
-    background-image: url(imgs/woodpg.jpg);
+    background-image: url(../img/woodpg.jpg);
 }
 .space{
     margin-top:30px;
@@ -29,7 +29,7 @@
 .stairs{
   border-color: black;
   background-color: red;
-  background-image: url(imgs/wood.jpg);
+  background-image: url(../img/wood.jpg);
   border-style: solid;
   border-width:.5px;
   border-radius: 30px;

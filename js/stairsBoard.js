@@ -93,13 +93,13 @@ class gameBoard {
        stair.stairAtrribute();
      return stair;
     }
-  buildCoin(){
-    let coin = new Coin();
-    //position in missing here
-    coin.size.width="30";
-    coin.size.height ="30";
-    coin.score = 10; // will change later
-  }
+  // buildCoin(){
+  //   let coin = new Coin();
+  //   //position in missing here
+  //   coin.size.width="30";
+  //   coin.size.height ="30";
+  //   coin.score = 10; // will change later
+  // }
 
   createHtmlStairs(){
         let stair=this.buildStair();
@@ -144,7 +144,7 @@ class gameBoard {
         lastStair=document.getElementsByClassName('stairs')[0];
         if(lastStair==undefined){
           this.board.appendChild(stair);
-          this.board.appendChild(coin);
+        //  this.board.appendChild(coin);
         }
         else {
           this.board.insertBefore(space, lastStair)

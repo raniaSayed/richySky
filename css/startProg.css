@@ -16,7 +16,7 @@
   width: 0%;
   height: 30px;
   border-radius: 20px;
-  background-image:url(/home/ALaaHayba/ITI/JavaScript_proj/DesignTest1/img/proBar.jpg);
+  background-image:url(../img/proBar.jpg);
 }
 
 #start {
@@ -29,7 +29,7 @@
     border-style: solid;
     border-width: 3px;
     border-radius: 20px;
-    background-image: url(/home/ALaaHayba/ITI/JavaScript_proj/DesignTest1/img/firstPage.png);
+    background-image: url(../img/firstPage.png);
     background-repeat: no-repeat;
     background-clip: border-box;
 
@@ -44,7 +44,7 @@
     border-style: solid;
     border-width: 3px;
     border-radius: 20px;
-    background-image: url(/home/ALaaHayba/ITI/JavaScript_proj/DesignTest1/img/menuePage.png);
+    background-image: url(../img/menuePage.png);
     background-repeat: no-repeat;
     background-clip: border-box;
     visibility: hidden;
@@ -61,7 +61,7 @@
   visibility:hidden;
   border-radius: 20px;
   border-style: solid;
-  background-image:url(/home/ALaaHayba/Downloads/next.jpg);
+  background-image:url(../img/Arrow_right.png);
 }
 
 #div_buttons{
@@ -79,7 +79,7 @@
     margin-top: 10px;
     width: 300px;
     height:60px;
-    background-image: url(/home/ALaaHayba/ITI/JavaScript_proj/DesignTest1/img/buttonImg.jpg);
+    background-image: url(../img/buttonImg.jpg);
     border-style: solid;
     border-radius: 20px;
     margin-left: 100px;

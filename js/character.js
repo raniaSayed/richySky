@@ -14,12 +14,12 @@ class Character {
         this.width = width;
         this.xLow = xLow;
         this.xHigh = xHigh;
-        this.position = Position;
-        this.position.x = Math.floor(((this.xHigh - this.xLow) / 2) - (0.5 * this.width));
-        this.position.y = 0;
+        this.location = new Position();
+        this.location.xPosition = Math.floor(((this.xHigh - this.xLow) / 2) - (0.5 * this.width));
+        this.location.yPosition = 0;
         this.character.style.position = 'absolute';
-        this.character.style.left = this.position.x + 'px';
-        this.character.style.bottom = this.position.y + 'px';
+        this.character.style.left = this.location.xPosition + 'px';
+        this.character.style.bottom = this.location.yPosition + 'px';
         this.character.style.height = this.height + 'px';
         this.character.style.width = this.width + 'px';
         this.interval = undefined; // To keep track of intervals of left and right moves 
@@ -30,23 +30,23 @@ class Character {
     }
 
     moveLeft() {
-        this.position.x -= 4;
-        this.character.style.left = this.position.x + 'px';
+        this.location.xPosition -= 4;
+        this.character.style.left = this.location.xPosition + 'px';
     }
 
     moveRight() {
-        this.position.x += 4;
-        this.character.style.left = this.position.x + 'px';
+        this.location.xPosition += 4;
+        this.character.style.left = this.location.xPosition + 'px';
     }
 
     jump() {
-        this.position.y += 4;
-        this.character.style.bottom = this.position.y + 'px';
+        this.location.yPosition += 4;
+        this.character.style.bottom = this.location.yPosition + 'px';
     }
 
-    down() {
-        this.position.y -= 4;
-        this.character.style.bottom = this.position.y + 'px';
+    fall() {
+        this.location.yPosition -= 4;
+        this.character.style.bottom = this.location.yPosition + 'px';
     }
 
     setupCharacter() {
@@ -55,7 +55,7 @@ class Character {
                 this.interval = setInterval(() => {
                     switch(e.keyCode) {
                         case 37:
-                        if (this.position.x <= 0) {
+                        if (this.location.xPosition <= 0) {
                             clearInterval(this.interval);
                             return;
                         }
@@ -63,7 +63,7 @@ class Character {
                         this.moveLeft();
                         break;
                         case 39:
-                        if (this.position.x >= (this.xHigh - this.xLow - this.width)) {
+                        if (this.location.xPosition >= (this.xHigh - this.xLow - this.width)) {
                             clearInterval(this.interval);
                             return;
                         }
@@ -88,15 +88,15 @@ class Character {
         document.onkeypress = (e) => {
             if (this.jumpInterval === undefined && e.keyCode === 32) {
                 this.jumpInterval = setInterval( () => {
-                    if (this.position.y >= 300) {
+                    if (this.location.yPosition >= 300) {
                         clearInterval(this.jumpInterval);
                         this.jumpInterval = setInterval( () => {
-                            if (this.position.y <= 0) {
+                            if (this.location.yPosition <= 0) {
                                 clearInterval(this.jumpInterval);
                                 this.jumpInterval = undefined;
                                 return;
                             }
-                            this.down();
+                            this.fall();
                         }, 5);
                     }
                     this.jump();

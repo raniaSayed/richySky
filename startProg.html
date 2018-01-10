@@ -1,0 +1,64 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="startProg.css">
+  <link rel="stylesheet" type="text/css" href="popup.css">
+    <link rel="stylesheet" type="text/css" href="stairsBoard.css">
+
+  <meta charset="utf-8">
+</head>
+
+<body background="/home/ALaaHayba/Downloads/stars-in-the-night-sky.jpg">
+
+  <div id="start">
+            <div id="progPos">
+              <div id="myProgress">
+                 <div id="myBar"> </div>
+              </div>
+          </div>
+          <button id="nextButton"><img  width="90" height="15" src="/home/ALaaHayba/Downloads/Arrow_right.png"></button>
+    </div>
+
+    <div id="menuePage">
+      <div id="div_buttons">
+         <button id="playBtn" class="startPageButton"> PLAY </button><br>
+         <button class="startPageButton">  HELP </button><br>
+         <button class="startPageButton"> SCORE </button><br>
+         <button class="startPageButton"> EXIT </button><br>
+       </div>
+      </div>
+
+      <div id="playersPage">
+            <!-- Popup Div Starts Here -->
+          <div id="popupSelectPlayer">
+              <div  id="formPlayer">
+                      <img id="closePic" src="/home/ALaaHayba/Downloads/close.jpg">
+                      <h2>Select Player</h2>
+                      <img width=200 height=300 src="/home/ALaaHayba/Downloads/girl.png">
+                      <img  width=200 height=300 src="/home/ALaaHayba/Downloads/boyHappy.jpg">
+
+                    <div id="radioButton">
+                         <input id="Poppy" type="radio" name="player" value="Poppy" >
+                         <b style="color:#9e0c57;" >Poppy</b>
+                         &nbsp; 	&nbsp; 	&nbsp; 	&nbsp; 	&nbsp; 	&nbsp; 	&nbsp; 	&nbsp; 	&nbsp;
+
+                         <input id="Branch" type="radio" name="player" value="Branch">
+                         <b style="color:blue;" >Branch</b>
+                    </div>
+
+                      <br> <b style="color:#4c0a10;">&nbsp;&nbsp; Your name: <input type="text" id="name" value="">
+                      <button id="submit">Play</button></b>
+                </div>
+            </div>
+              <!-- Popup Div Ends Here -->
+        </div>
+
+        <div id="playingBoard">
+          <div id="boardStairs">
+
+          </div>
+        </div>
+</body>
+    <script src="startProg.js"> </script>
+    <script src="popup.js"> </script>
+      <script src="stairsBoard.js"> </script>
+</html>

@@ -93,6 +93,13 @@ class gameBoard {
        stair.stairAtrribute();
      return stair;
     }
+  buildCoin(){
+    let coin = new Coin();
+    //position in missing here
+    coin.size.width="30";
+    coin.size.height ="30";
+    coin.score = 10; // will change later
+  }
 
   createHtmlStairs(){
         let stair=this.buildStair();
@@ -104,6 +111,16 @@ class gameBoard {
         stairHtml.style.marginLeft=stair.rowPos+'px';
         return stairHtml;
     }
+  createHtmlCoins(x){
+    let coin = document.createElement("img");
+    coin.src= "coin.png";
+    coin.style.width="30px";
+    coin.style.position="absolute";
+   // coin.style.bottom = Number(positionFromBottom +60)+ "px";
+    coin.style.left  = (100) + "px";
+    move(coin);
+}
+
 
    createHtmlSpace(){
 
@@ -121,10 +138,13 @@ class gameBoard {
       for(let i=0;i<num;i++)
       {
         stair=this.createHtmlStairs();
+        coin = this.createHtmlCoins(50);
         space=this.createHtmlSpace();
+
         lastStair=document.getElementsByClassName('stairs')[0];
         if(lastStair==undefined){
           this.board.appendChild(stair);
+          this.board.appendChild(coin);
         }
         else {
           this.board.insertBefore(space, lastStair)

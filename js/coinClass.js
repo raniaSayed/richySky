@@ -1,3 +1,9 @@
+class Size{
+    constructor(weigth , height){
+        this.weigth = weigth;
+        this.height = height;
+    }
+}
 class Coin {
 	constructor(position , size , type ,score ){
 		this.position = position;

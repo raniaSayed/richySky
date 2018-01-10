@@ -1,30 +1,23 @@
 class Character {
     // Parameters
     // ##########
-    // name(String): name of the character 
+    // name(String): name of the character
     // characterImageId(String): value of id attribute of the character image
-    // xLow(Number): the distance from left of the screen to the left border of the game 
-    // xHigh(Number): the distance from left of the screen to the right border of the game
+    // xLeftBorder(Number): the distance from left of the screen to the left border of the game
+    // xRightBorder(Number): the distance from left of the screen to the right border of the game
     // height(Number): height of the character image
     // width(Number): width of the character image
-    constructor(name, characterImageId, xLow, xHigh, height, width) {
+    constructor(name, characterImageId, xLeftBorder, xRightBorder, height, width) {
         this.name = name;
         this.character = document.getElementById(characterImageId);
         this.height = height;
         this.width = width;
-        this.xLow = xLow;
-        this.xHigh = xHigh;
+        this.xLeftBorder = xLeftBorder;
+        this.xRightBorder = xRightBorder;
         this.location = new Position();
-        this.location.xPosition = Math.floor(((this.xHigh - this.xLow) / 2) - (0.5 * this.width));
-        this.location.yPosition = 0;
-        this.character.style.position = 'absolute';
-        this.character.style.left = this.location.xPosition + 'px';
-        this.character.style.bottom = this.location.yPosition + 'px';
-        this.character.style.height = this.height + 'px';
-        this.character.style.width = this.width + 'px';
-        this.interval = undefined; // To keep track of intervals of left and right moves 
-        this.jumpInterval = undefined; // To keep track of intervals of up and down moves
-        this.setupCharacter(); // initialize the character
+        this.moving = undefined;
+        this.jumping = undefined;
+        this.initCharacter();
 
         // position of stairs and coins handling to be added !!!
     }
@@ -49,58 +42,75 @@ class Character {
         this.character.style.bottom = this.location.yPosition + 'px';
     }
 
-    setupCharacter() {
+    initCharacter() {
+        this.location.xPosition = Math.floor(((this.xRightBorder - this.xLeftBorder) / 2) - (0.5 * this.width));
+        this.location.yPosition = 0;
+        this.character.style.position = 'absolute';
+        this.character.style.left = this.location.xPosition + 'px';
+        this.character.style.bottom = this.location.yPosition + 'px';
+        this.character.style.height = this.height + 'px';
+        this.character.style.width = this.width + 'px';
+        this.moveHandler();
+        this.moveStopHandler();
+        this.jumpHandler();
+    }
+
+    moveHandler() {
         document.onkeydown = (e) => {
-            if (this.interval === undefined && (e.keyCode === 37 || e.keyCode === 39)) {
-                this.interval = setInterval(() => {
+            if (!this.moving && (e.keyCode === 37 || e.keyCode === 39)) {
+                this.moving = setInterval(() => {
                     switch(e.keyCode) {
                         case 37:
                         if (this.location.xPosition <= 0) {
-                            clearInterval(this.interval);
+                            clearInterval(this.moving);
                             return;
                         }
                         this.character.setAttribute('src', '18_left.png');
                         this.moveLeft();
                         break;
                         case 39:
-                        if (this.location.xPosition >= (this.xHigh - this.xLow - this.width)) {
-                            clearInterval(this.interval);
+                        if (this.location.xPosition >= (this.xRightBorder - this.xLeftBorder - this.width)) {
+                            clearInterval(this.moving);
                             return;
                         }
                         this.character.setAttribute('src', '01_right.png');
                         this.moveRight();
                         break;
                     }
-                    
+
                 }, 10);
             }
         }
-        
+    }
+
+    moveStopHandler() {
         document.onkeyup = (e) => {
             if (e.keyCode === 37 || e.keyCode === 39) {
-                clearInterval(this.interval);
-                this.interval = undefined;
+                clearInterval(this.moving);
+                this.moving = undefined;
                 this.character.setAttribute('src', '11_front.png');
 
             }
         }
+    }
 
+    jumpHandler() {
         document.onkeypress = (e) => {
-            if (this.jumpInterval === undefined && e.keyCode === 32) {
-                this.jumpInterval = setInterval( () => {
-                    if (this.location.yPosition >= 300) {
-                        clearInterval(this.jumpInterval);
-                        this.jumpInterval = setInterval( () => {
-                            if (this.location.yPosition <= 0) {
-                                clearInterval(this.jumpInterval);
-                                this.jumpInterval = undefined;
+            if (!this.jumping && e.keyCode === 32) {
+                this.jumping = setInterval( (jump) => {
+                    if (this.location.yPosition >= jump) {
+                        clearInterval(this.jumping);
+                        this.jumping = setInterval( (fall) => {
+                            if (this.location.yPosition <= fall) {
+                                clearInterval(this.jumping);
+                                this.jumping = undefined;
                                 return;
                             }
                             this.fall();
-                        }, 5);
+                        }, 5, this.location.yPosition - 300);
                     }
                     this.jump();
-                }, 5);
+                }, 5, this.location.yPosition + 300);
             }
         }
     }

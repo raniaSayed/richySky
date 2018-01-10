@@ -1,0 +1,87 @@
+#progPos{
+
+   width:500px;
+   margin-left: auto;
+   margin-right: auto ;
+   margin-top: 500px;
+}
+
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+  border-radius: 20px;
+}
+
+#myBar {
+  width: 0%;
+  height: 30px;
+  border-radius: 20px;
+  background-image:url(../img/proBar.jpg);
+}
+
+#start {
+
+    border-color: gray;
+    background-color: white;
+    margin: auto;
+    width: 727px;
+    height:570px;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 20px;
+    background-image: url(../img/firstPage.png);
+    background-repeat: no-repeat;
+    background-clip: border-box;
+
+}
+#menuePage{
+
+    border-color: gray;
+    background-color: white;
+    margin: auto;
+    width: 727px;
+    height:570px;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 20px;
+    background-image: url(../img/menuePage.png);
+    background-repeat: no-repeat;
+    background-clip: border-box;
+    visibility: hidden;
+    display: none;
+
+}
+#nextButton{
+  border-color: gray;
+  background-color: white;
+  margin: auto;
+  width: 100px;
+  height:30px;
+  margin-left: 620px;
+  visibility:hidden;
+  border-radius: 20px;
+  border-style: solid;
+  background-image:url(../img/Arrow_right.png);
+}
+
+#div_buttons{
+  margin-left: 100px;
+  margin-top: 230px;
+}
+
+.startPageButton{
+    cursor:pointer;
+    font-family: Courier, Monaco, monospace;
+    font-weight: bold;
+    color:#0e192b;
+    font-style: italic;
+    font-size: 30px;
+    margin-top: 10px;
+    width: 300px;
+    height:60px;
+    background-image: url(../img/buttonImg.jpg);
+    border-style: solid;
+    border-radius: 20px;
+    margin-left: 100px;
+    box-shadow: -8px 8px 10px 3px rgba(200,20,300,0.9);
+}

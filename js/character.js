@@ -14,7 +14,7 @@ class Character {
         this.width = width;
         this.xLow = xLow;
         this.xHigh = xHigh;
-        this.location = new Position;
+        this.location = new Position();
         this.location.xPosition = Math.floor(((this.xHigh - this.xLow) / 2) - (0.5 * this.width));
         this.location.yPosition = 0;
         this.character.style.position = 'absolute';

@@ -30,26 +30,7 @@ class stairsFactory{
     let stairsHeight=[30,30,25,20,15,15,10,10,5,5];
     let stairHeight=0;
     let stairNum=stairsFactory.stairNum;
-     if(stairNum>=1 && stairNum<=100)
-        stairHeight=stairsHeight[0];
-        else if(stairNum>=101 && stairNum<=200)
-           stairHeight=stairsHeight[1];
-           else if(stairNum>=201 && stairNum<=300)
-              stairHeight=stairsHeight[2];
-              else if(stairNum>=301 && stairNum<=400)
-                 stairHeight=stairsHeight[3];
-                 else if(stairNum>=401 && stairNum<=500)
-                    stairHeight=stairsHeight[4];
-                    else if(stairNum>=501 && stairNum<=600)
-                       stairHeight=stairsHeight[5];
-                       else if(stairNum>=601 && stairNum<=700)
-                          stairHeight=stairsHeight[6];
-                          else if(stairNum>=701 && stairNum<=800)
-                             stairHeight=stairsHeight[7];
-                             else if(stairNum>=801 && stairNum<=900)
-                                stairHeight=stairsHeight[8];
-                                else
-                                   stairHeight=stairsHeight[9];
+    stairHeight=stairsHeight[Math.floor(stairsFactory.stairNum/100)];
     return stairHeight;
   }
 
@@ -81,8 +62,9 @@ class stairsFactory{
 class gameBoard {
 
  constructor(){
-   this.board = document.getElementById('boardStairs'); //in ctor
-   this.stairsPosition =[];//ctor
+   this.board = document.getElementById('boardStairs');
+   this.stairsPosition =[];
+   this.stairsAtrr={};
    this.stairs = document.getElementsByClassName("stairs");
    //this.stairsPosition= getStairsPosition(stairs);
     this.stairsInterval=[];
@@ -93,13 +75,6 @@ class gameBoard {
        stair.stairAtrribute();
      return stair;
     }
-  // buildCoin(){
-  //   let coin = new Coin();
-  //   //position in missing here
-  //   coin.size.width="30";
-  //   coin.size.height ="30";
-  //   coin.score = 10; // will change later
-  // }
 
   createHtmlStairs(){
         let stair=this.buildStair();
@@ -108,19 +83,9 @@ class gameBoard {
         stairHtml.setAttribute('number',stair.stairNum);
         stairHtml.style.width=stair.stairWidth+'px';
         stairHtml.style.height=stair.stairHeight+'px';
-        stairHtml.style.marginLeft=stair.rowPos+'px';
+        stairHtml.style.marginLeft=stair.marginLeft+'px';
         return stairHtml;
     }
-  createHtmlCoins(x){
-    let coin = document.createElement("img");
-    coin.src= "coin.png";
-    coin.style.width="30px";
-    coin.style.position="absolute";
-   // coin.style.bottom = Number(positionFromBottom +60)+ "px";
-    coin.style.left  = (100) + "px";
-    move(coin);
-}
-
 
    createHtmlSpace(){
 
@@ -138,13 +103,11 @@ class gameBoard {
       for(let i=0;i<num;i++)
       {
         stair=this.createHtmlStairs();
-        coin = this.createHtmlCoins(50);
         space=this.createHtmlSpace();
-
         lastStair=document.getElementsByClassName('stairs')[0];
         if(lastStair==undefined){
           this.board.appendChild(stair);
-        //  this.board.appendChild(coin);
+          console.log()
         }
         else {
           this.board.insertBefore(space, lastStair)
@@ -164,6 +127,31 @@ class gameBoard {
       }
     }
 
+   getStairsPosition2(stairs){
+      let stairsPos=[];
+      let startPos=new Position();
+      let endPos=new Position();
+      let ypos=0
+       //stairsAtrr
+      console.log(stairs.length)
+      for (var i=stairs.length-1 ;i>=0;i--){
+         startPos.xPosition= stairs[i].style.marginLeft;
+         startPos.yPosition= ypos+80+30;
+         endPos.xPosition= parseInt(stairs[i].style.marginLeft)+parseInt(stairs[i].style.width);
+         endPos.yPosition=ypos+80+30;
+         ypos+=110;
+         console.log("hereee  "+stairs[i].getBoundingClientRect().left,""+stairs[i].getBoundingClientRect().right)
+        //startPos.xPosition=stairs[i].getBoundingClientRect().left;
+        //startPos.yPosition=stairs[i].getBoundingClientRect().bottom;
+        //endPos.xPosition=stairs[i].getBoundingClientRect().right;
+        //endPos.yPosition=stairs[i].getBoundingClientRect().bottom;
+    //    console.log("here"+stairs[i].style.marginLeft);
+        console.log(stairs[i]);
+        console.log(startPos.xPosition,"  ",startPos.yPosition," ,,",endPos.xPosition,"  ",endPos.yPosition,"")
+        //  console.log( startPos.xPosition)
+      //  console.log(stairs[i]," ",  stairsPos[i].startx,"  ",stairs[i].style.width+"  "+  stairsPos[i].top);
+      }
+   }
    deleteStair(index){
       let stair = document.getElementsByClassName('stairs')[index];
       let space = document.getElementsByClassName('space')[0];
@@ -181,9 +169,11 @@ class gameBoard {
         this.generateOneStair();
         this.getStairsPosition(this.stairs);///get new stairs Position.
         this.stairsMove();
+
     }
 
   move(stair,index) {
+        // this.getStairsPosition2(this.stairs)
         if (this.stairsPosition[index]==550) {
           this.deleteStair(index);
           this.updateBoardStairs();
@@ -205,8 +195,11 @@ class gameBoard {
   startGame(){
       this.generateBoardStairs(7);
        this.stairs = document.getElementsByClassName("stairs");
+    //   this.getstairsPosition(this.stairs);
        this.getStairsPosition(this.stairs);
-       this.stairsMove();
+       this.getStairsPosition2(this.stairs);
+  //     this.getStairsPosition2(this.stairs)
+    //    this.stairsMove();
     }
 
 }

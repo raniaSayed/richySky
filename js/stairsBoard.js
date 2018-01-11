@@ -112,6 +112,7 @@ class gameBoard {
 
         let stairHtml = document.createElement('div');
         let coinHtml = document.createElement('img');
+        coinHtml.setAttribute('id',stair.stairNum);
 
         coinHtml.setAttribute('class','coins');
         
@@ -129,6 +130,8 @@ class gameBoard {
 
         stairParentHtml.appendChild(stairHtml);
         stairParentHtml.appendChild(coinHtml);
+
+
         return stairParentHtml;
     }
 
@@ -152,16 +155,26 @@ class gameBoard {
         lastStair=document.getElementsByClassName('stairsParent')[0];
         if(lastStair==undefined){
           this.board.appendChild(stair);
+          console.log(stair.getAttribute('number'));
+          this.generateCoinObj(stair.getAttribute('number'));
         }
         else {
           this.board.insertBefore(space, lastStair)
           this.board.insertBefore(stair, space)
+          console.log(stair.getAttribute('number'));
+          this.generateCoinObj(stair.getAttribute('number'));
         }
       }
     }
 
    generateOneStair(){
       this.generateBoardStairs(1)
+    }
+
+   generateCoinObj(currStairNum){
+      //create coin object
+        let coinObj = new Coin(null, currStairNum , new Size(20,20) , "regular" ,10);
+        coinObj.move();
     }
 
    getStairsPosition(stairs){

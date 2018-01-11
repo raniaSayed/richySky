@@ -40,12 +40,12 @@
 
 }
 #menuePage{
-
+    position: relative;
     border-color: gray;
     background-color: white;
     margin: auto;
-    width: 727px;
-    height:570px;
+    height: 100%;
+    width: 60%;
     border-style: solid;
     border-width: 3px;
     border-radius: 20px;
@@ -54,6 +54,7 @@
     background-clip: border-box;
     visibility: hidden;
     display: none;
+    background-size: cover;
 
 }
 #nextButton{
@@ -71,8 +72,10 @@
 }
 
 #div_buttons{
-  margin-left: 100px;
-  margin-top: 230px;
+  position: absolute;
+  bottom: 100px;
+  left: 300px;
+  height: 400px;
 }
 
 .startPageButton{

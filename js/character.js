@@ -28,11 +28,10 @@ function generateBlocks()
     block.style.left = x + "px";
     b.appendChild(block);
     blocksTag.push(block);
-    blocks[n++] = {xObstacle : x, yObstacle : y, width : 200};
+    blocks[n++] = {xObstacle : x, yObstacle : y, width : 200, height : 50};
     positionFromBottom += 100;
     if(n > 10)
     clearInterval(interval);
-    //console.log(blocks);
 }
 
 function moveBlocks()
@@ -44,7 +43,7 @@ function moveBlocks()
     }
 }
 
-let interval2 = setInterval(moveBlocks, 300);
+let interval2 = setInterval(moveBlocks, 100);
 
 
 
@@ -90,20 +89,26 @@ class charachter
         this.moveWithObstacle = false;
         this.whichObstacle = 0;
         this.location = new Position(x, y);
-        image.left = x + "px";
-        image.bottom = y + "px";
-        document.addEventListener("keydown", this.arrow.bind(this));
-        document.addEventListener("keyup", this.space.bind(this));
+        this.initCharacter();
     }
 
-    arrow (event){
-        if(( event.keyCode === 37 || event.keyCode === 39 ) && !this.moving)
+    initCharacter()
+    {
+        image.left = this.location.xPosition + "px";
+        image.bottom = this.location.yPosition + "px";
+        document.addEventListener("keydown", this.control1.bind(this));
+        document.addEventListener("keyup", this.control2.bind(this));
+    }
+
+    control1(event)
+    {
+        if( ( event.keyCode === 37 || event.keyCode === 39 ) && !this.moving)
         {
             this.moving = setInterval(this.move.bind(this), 2, event.keyCode);
         }
     }
 
-    space(event)
+    control2(event)
     {
         if(event.keyCode === 37 || event.keyCode === 39){
           clearInterval(this.moving);
@@ -124,7 +129,8 @@ class charachter
             this.location.xPosition -= 2;
             image.left = this.location.xPosition + "px";
         }
-        if( ( this.location.xPosition > blocks[this.whichObstacle].xObstacle + 200 || this.location.xPosition +  50 < blocks[this.whichObstacle].xObstacle)
+        if( ( this.location.xPosition > blocks[this.whichObstacle].xObstacle + blocks[this.whichObstacle].width
+              || this.location.xPosition +  50 < blocks[this.whichObstacle].xObstacle)
               && this.onObstacle && !this.jumping && !this.falling)
         {
             clearInterval(this.moveWithObstacle);
@@ -174,10 +180,10 @@ class charachter
         for(let i = 0; i < blocks.length; i++)
         {
             //console.log("same height");
-            if(this.location.yPosition === blocks[i].yObstacle + 50)
+            if(this.location.yPosition === blocks[i].yObstacle + blocks[i].height)
             {
                 //console.log("same height");
-                if(this.location.xPosition + 50 >= blocks[i].xObstacle && this.location.xPosition  < blocks[i].xObstacle + 200 )
+                if(this.location.xPosition + 50 >= blocks[i].xObstacle && this.location.xPosition  < blocks[i].xObstacle + blocks[i].width)
                 {
                     //console.log("on range of obstacle");
                     clearInterval(interval2);
@@ -185,7 +191,7 @@ class charachter
                     clearInterval(this.falling);
                     this.falling = false;
                     this.onObstacle = true;
-                    this.moveWithObstacle = setInterval(this.moveTogether.bind(this), 300)
+                    this.moveWithObstacle = setInterval(this.moveTogether.bind(this), 100)
                     this.whichObstacle = i;
                     return;
                 }
@@ -197,10 +203,10 @@ class charachter
     moveTogether(){
         for(let i = 0; i < blocks.length; i++)
         {
-            blocks[i].yObstacle -= 1;
+            blocks[i].yObstacle -= 5;
             blocksTag[i].style.bottom = blocks[i].yObstacle;
         }
-        this.location.yPosition -= 1;
+        this.location.yPosition -= 5;
         image.bottom = this.location.yPosition + "px";
     }
 }

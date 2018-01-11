@@ -5,23 +5,27 @@ class Size{
     }
 }
 class Coin {
-	constructor(coinNode, position , size , type ,score, parentDiv ){
+	constructor(position , size , type ,score){
         this.position = position;
 		this.size = size;
 		this.type = type;
 		this.score = score;
-        generateCoinNode();
+        this.coinNode =  this.generateCoinNode();
 	}
+
     generateCoinNode(){
-        this.coinNode = document.createElement("img");
-        this.coinNode.src= this.type;//"coin.png"
-        this.coinNode.style.width=this.size.weigth; //"30px";
-        this.coinNode.style.position="absolute";
-        this.coinNode.style.bottom = this.position.x+"px"; //Number(positionFromBottom +60)+ "px";
-        this.coinNode.style.left  = this.position.y+"px"; //(x+100) + "px";
-        let parentDiv =  document.getElementById("boardStairs");
-        parentDiv.appendChild(coin);
-        move(this.coinNode);
+//        let div= document.createElement('div');
+        //div.setAttribute('class','coins');
+
+        let coinNode = document.createElement("img");
+        coinNode.setAttribute('class','coins');
+        coinNode.src= this.type;//"coin.png"
+        coinNode.style.width=this.size.weigth; //"30px";
+      //  coinNode.style.position="absolute";
+        coinNode.style.bottom = this.position.x+"px"; //Number(positionFromBottom +60)+ "px";
+        coinNode.style.left  = this.position.y+"px"; //(x+100) + "px";
+     //   move(coinNode);
+        return coinNode;
     }
 	
 	set coinNode(coinNode)
@@ -69,6 +73,11 @@ class Coin {
     {
         return this._score;
     }
+    get coinNode()
+    {
+        return this._coinNode;
+    }
+
     
 }
 

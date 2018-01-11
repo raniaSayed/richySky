@@ -35,3 +35,11 @@
   border-radius: 30px;
   position: absolute;
 }
+.coins{
+  position:absolute;
+  bottom: 0px;
+}
+.stairsParent{
+  position:absolute;
+}
+

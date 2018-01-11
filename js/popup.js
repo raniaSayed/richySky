@@ -1,4 +1,6 @@
 
+
+let gameObj=null;
 //Function To Display Popup
 function div_show(divName) {
 document.getElementById(divName).style.display = "block";
@@ -42,8 +44,10 @@ function clkFn(){
           div_hide("playersPage");
           div_hide("menuePage");
           div_show("playingBoard");
-          let game=new gameBoard();
-          game.startGame();
+          gameObj=new game();
+
+          //let game=new gameBoard();
+          //game.startGame();
         }
   }
 

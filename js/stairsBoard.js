@@ -199,7 +199,7 @@ class gameBoard {
        this.getStairsPosition(this.stairs);
        this.getStairsPosition2(this.stairs);
   //     this.getStairsPosition2(this.stairs)
-    //    this.stairsMove();
+       this.stairsMove();
     }
 
 }

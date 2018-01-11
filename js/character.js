@@ -1,109 +1,214 @@
-class Character {
-    // Parameters
-    // ##########
-    // name(String): name of the character 
-    // characterImageId(String): value of id attribute of the character image
-    // xLow(Number): the distance from left of the screen to the left border of the game 
-    // xHigh(Number): the distance from left of the screen to the right border of the game
-    // height(Number): height of the character image
-    // width(Number): width of the character image
-    constructor(name, characterImageId, xLow, xHigh, height, width) {
-        this.name = name;
-        this.character = document.getElementById(characterImageId);
-        this.height = height;
-        this.width = width;
-        this.xLow = xLow;
-        this.xHigh = xHigh;
-        this.location = new Position();
-        this.location.xPosition = Math.floor(((this.xHigh - this.xLow) / 2) - (0.5 * this.width));
-        this.location.yPosition = 0;
-        this.character.style.position = 'absolute';
-        this.character.style.left = this.location.xPosition + 'px';
-        this.character.style.bottom = this.location.yPosition + 'px';
-        this.character.style.height = this.height + 'px';
-        this.character.style.width = this.width + 'px';
-        this.interval = undefined; // To keep track of intervals of left and right moves 
-        this.jumpInterval = undefined; // To keep track of intervals of up and down moves
-        this.setupCharacter(); // initialize the character
 
-        // position of stairs and coins handling to be added !!!
-    }
+image = document.getElementById('image').style;
 
-    moveLeft() {
-        this.location.xPosition -= 4;
-        this.character.style.left = this.location.xPosition + 'px';
-    }
 
-    moveRight() {
-        this.location.xPosition += 4;
-        this.character.style.left = this.location.xPosition + 'px';
-    }
+let b = document.getElementById("blocks");
+let block = document.createElement("img");
+let positionFromBottom = 50;
 
-    jump() {
-        this.location.yPosition += 4;
-        this.character.style.bottom = this.location.yPosition + 'px';
-    }
+let blocks = [];
+let blocksTag = [];
 
-    fall() {
-        this.location.yPosition -= 4;
-        this.character.style.bottom = this.location.yPosition + 'px';
-    }
+let n = 0;
 
-    setupCharacter() {
-        document.onkeydown = (e) => {
-            if (this.interval === undefined && (e.keyCode === 37 || e.keyCode === 39)) {
-                this.interval = setInterval(() => {
-                    switch(e.keyCode) {
-                        case 37:
-                        if (this.location.xPosition <= 0) {
-                            clearInterval(this.interval);
-                            return;
-                        }
-                        this.character.setAttribute('src', '18_left.png');
-                        this.moveLeft();
-                        break;
-                        case 39:
-                        if (this.location.xPosition >= (this.xHigh - this.xLow - this.width)) {
-                            clearInterval(this.interval);
-                            return;
-                        }
-                        this.character.setAttribute('src', '01_right.png');
-                        this.moveRight();
-                        break;
-                    }
-                    
-                }, 10);
-            }
-        }
-        
-        document.onkeyup = (e) => {
-            if (e.keyCode === 37 || e.keyCode === 39) {
-                clearInterval(this.interval);
-                this.interval = undefined;
-                this.character.setAttribute('src', '11_front.png');
+let interval = setInterval(generateBlocks, 1);
 
-            }
-        }
+function generateBlocks()
+{
+    let block = document.createElement("img");
+    block.src = "block.jpg";
+    block.style.height = "50px";
+    block.style.width = "200px";
+    block.style.position = "absolute";
+    y = positionFromBottom + 50;
+    block.style.bottom = positionFromBottom + "px";
+    let x = Math.floor(Math.random() * 1000) ;
+    while (x > window.innerWidth -1000)
+        x = Math.floor(Math.random() * 1000);
+    block.style.left = x + "px";
+    b.appendChild(block);
+    blocksTag.push(block);
+    blocks[n++] = {xObstacle : x, yObstacle : y, width : 200, height : 50};
+    positionFromBottom += 100;
+    if(n > 10)
+    clearInterval(interval);
+}
 
-        document.onkeypress = (e) => {
-            if (this.jumpInterval === undefined && e.keyCode === 32) {
-                this.jumpInterval = setInterval( () => {
-                    if (this.location.yPosition >= 300) {
-                        clearInterval(this.jumpInterval);
-                        this.jumpInterval = setInterval( () => {
-                            if (this.location.yPosition <= 0) {
-                                clearInterval(this.jumpInterval);
-                                this.jumpInterval = undefined;
-                                return;
-                            }
-                            this.fall();
-                        }, 5);
-                    }
-                    this.jump();
-                }, 5);
-            }
-        }
+function moveBlocks()
+{
+    for(let i = 0; i < blocks.length; i++)
+    {
+        blocks[i].yObstacle -= 5;
+        blocksTag[i].style.bottom = blocks[i].yObstacle;
     }
 }
 
-var c = new Character('Ball', 'ball', 100, 1600, 96, 72);
+let interval2 = setInterval(moveBlocks, 100);
+
+
+
+class Position
+{
+    constructor(xPosition = 0, yPosition = 0)
+    {
+        this.xPosition = xPosition;
+        this.yPosition = yPosition;
+    }
+
+    set xPosition(x)
+    {
+        this._xPosition = x;
+    }
+
+    set yPosition(y)
+    {
+        this._yPosition = y;
+    }
+
+
+    get xPosition()
+    {
+        return this._xPosition;
+    }
+
+    get yPosition()
+    {
+        return this._yPosition;
+    }
+}
+
+class charachter
+{
+    constructor(name, x = 0, y = 0)
+    {
+        this.name = name;
+        this.moving = false;
+        this.jumping = false;
+        this.falling = false;
+        this.onObstacle = false;
+        this.moveWithObstacle = false;
+        this.whichObstacle = 0;
+        this.location = new Position(x, y);
+        this.initCharacter();
+    }
+
+    initCharacter()
+    {
+        image.left = this.location.xPosition + "px";
+        image.bottom = this.location.yPosition + "px";
+        document.addEventListener("keydown", this.control1.bind(this));
+        document.addEventListener("keyup", this.control2.bind(this));
+    }
+
+    control1(event)
+    {
+        if( ( event.keyCode === 37 || event.keyCode === 39 ) && !this.moving)
+        {
+            this.moving = setInterval(this.move.bind(this), 2, event.keyCode);
+        }
+    }
+
+    control2(event)
+    {
+        if(event.keyCode === 37 || event.keyCode === 39){
+          clearInterval(this.moving);
+          this.moving = false;
+        }
+        else if(event.keyCode === 32 &&  !this.jumping && !this.falling)
+          this.jumping = setInterval(this.jump.bind(this), 5, this.location.yPosition + 300);
+    }
+
+    move(direction) {
+
+        if (direction == 39 && this.location.xPosition <  window.innerWidth)
+        {
+          this.location.xPosition += 2;
+          image.left = this.location.xPosition + "px";
+        }
+        else if(direction == 37 && this.location.xPosition > 0){
+            this.location.xPosition -= 2;
+            image.left = this.location.xPosition + "px";
+        }
+        if( ( this.location.xPosition > blocks[this.whichObstacle].xObstacle + blocks[this.whichObstacle].width
+              || this.location.xPosition +  50 < blocks[this.whichObstacle].xObstacle)
+              && this.onObstacle && !this.jumping && !this.falling)
+        {
+            clearInterval(this.moveWithObstacle);
+            this.falling = setInterval(this.fallDown.bind(this), 5);
+            clearInterval(this.moveWithObstacle);
+            if(!interval2)
+                 interval2 = setInterval(moveBlocks, 300);
+            //interval2 = setInterval(moveBlocks, 300);
+            this.onObstacle = false;
+        }
+    }
+
+    jump(ceil)
+    {
+        clearInterval(this.moveWithObstacle);
+        if(!interval2)
+             interval2 = setInterval(moveBlocks, 300);
+        this.location.yPosition += 5;
+        if( this.location.yPosition > ceil && !this.falling)
+        {
+          clearInterval(this.jumping);
+          this.jumping = false;
+          this.falling = setInterval(this.fallDown.bind(this), 5);
+          return;
+        }
+        image.bottom = this.location.yPosition + "px";
+    }
+
+    fallDown()
+    {
+        this.location.yPosition -= 5;
+        this.search();
+        if(this.location.yPosition <  0 && !this.jumping)
+        {
+            clearInterval(this.falling);
+            this.falling = false;
+            return;
+        }
+        image.bottom = this.location.yPosition + "px";
+    }
+
+    search()
+    {
+        //console.log("search func entered");
+        //clearInterval(interval2);
+        //console.log(blocks);
+        for(let i = 0; i < blocks.length; i++)
+        {
+            //console.log("same height");
+            if(this.location.yPosition === blocks[i].yObstacle + blocks[i].height)
+            {
+                //console.log("same height");
+                if(this.location.xPosition + 50 >= blocks[i].xObstacle && this.location.xPosition  < blocks[i].xObstacle + blocks[i].width)
+                {
+                    //console.log("on range of obstacle");
+                    clearInterval(interval2);
+                    interval2 = false;
+                    clearInterval(this.falling);
+                    this.falling = false;
+                    this.onObstacle = true;
+                    this.moveWithObstacle = setInterval(this.moveTogether.bind(this), 100)
+                    this.whichObstacle = i;
+                    return;
+                }
+            }
+        }
+        //interval2 = setInterval(moveBlocks, 300);
+    }
+
+    moveTogether(){
+        for(let i = 0; i < blocks.length; i++)
+        {
+            blocks[i].yObstacle -= 5;
+            blocksTag[i].style.bottom = blocks[i].yObstacle;
+        }
+        this.location.yPosition -= 5;
+        image.bottom = this.location.yPosition + "px";
+    }
+}
+
+let gemy = new charachter("gemy");

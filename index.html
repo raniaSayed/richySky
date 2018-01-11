@@ -1,18 +1,66 @@
-<!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+  <link rel="stylesheet" type="text/css" href="css/startProg.css">
+  <link rel="stylesheet" type="text/css" href="css/popup.css">
+    <link rel="stylesheet" type="text/css" href="css/stairsBoard.css">
+
+  <meta charset="utf-8">
 </head>
-<body style="max-width: 100%; overflow: hidden;">
 
-<div id="mainDiv" >
-<img src="imgs/boll.png" id="char" style="position:absolute;z-index: 1;width: 70px;">
+<body background="img/stars-in-the-night-sky.jpg">
 
- 
-</div>
+  <div id="start">
+            <div id="progPos">
+              <div id="myProgress">
+                 <div id="myBar"> </div>
+              </div>
+          </div>
+          <button id="nextButton"><img  width="90" height="15" src="img/Arrow_right.png"></button>
+    </div>
 
-<script type="text/javascript" src="js/game2.js"></script>
-<script type="text/javascript" src="js/position.js"></script>
-<script type="text/javascript" src="js/coinClass.js"></script>
+    <div id="menuePage">
+      <div id="div_buttons">
+         <button id="playBtn" class="startPageButton"> PLAY </button><br>
+         <button class="startPageButton">  HELP </button><br>
+         <button class="startPageButton"> SCORE </button><br>
+         <button class="startPageButton"> EXIT </button><br>
+       </div>
+      </div>
+
+      <div id="playersPage">
+            <!-- Popup Div Starts Here -->
+          <div id="popupSelectPlayer">
+              <div  id="formPlayer">
+                      <img id="closePic" src="img/close.jpg">
+                      <h2>Select Player</h2>
+                      <img id="character1" width=200 height=300 src="img/temPoppy.png">
+                      <img id="character2" width=200 height=300 src="img/happyBranch.jpg">
+
+                     <div id="radioButton">
+                         <input id="Poppy" type="radio" name="player" value="Poppy" >
+                         <label class="charLabel" for="Poppy" style="color:#9e0c57;" >Poppy</label>
+                         &nbsp;   &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
+
+                         <input id="Branch" type="radio" name="player" value="Branch">
+                         <label class="charLabel" for="Branch" style="color:blue;" >Branch</label>
+                    </div>
+                      <br> <b style="color:#4c0a10;">&nbsp;&nbsp; Your name: <input type="text" id="name" value="X Player">
+                      <button id="submit">Play</button></b>
+                </div>
+            </div>
+              <!-- Popup Div Ends Here -->
+        </div>
+
+        <div id="playingBoard">
+          <div id="boardStairs">
+
+          </div>
+        </div>
 </body>
+    <script src="js/position.js"></script>
+    <script src="js/coinClass.js"></script>
+    <script src="js/startProg.js"> </script>
+    <script src="js/popup.js"> </script>
+    <script src="js/stairsBoard.js"> </script>
+
 </html>

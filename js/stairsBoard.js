@@ -119,7 +119,7 @@ class gameBoard {
       }
     }
 
-   generateOneStair2(){
+   generateOneStair(){
       this.generateBoardStairs(1)
     }
 
@@ -200,7 +200,7 @@ class gameBoard {
        this.stairs = document.getElementsByClassName("stairs")
        this.getStairsPosition();
       // this.getStairsPosition2();
-      //  this.stairsMove();//osition(stairs);
+       this.stairsMove();//osition(stairs);
       //  this.charPlayer=new character();
     }
 

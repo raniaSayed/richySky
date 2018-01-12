@@ -14,6 +14,7 @@ class character
         this.blocks = null;
         this.location = new Position(x, y);
         this.image = document.getElementById("charImg").style;
+        //this.imageMoving = document.getElementById("charImg").src;
         this.initCharacter();
     }
 
@@ -30,6 +31,7 @@ class character
     {
         if( ( event.keyCode === 37 || event.keyCode === 39 ) && !this.moving)
         {
+
             this.moving = setInterval(this.move.bind(this), 2, event.keyCode);
         }
     }
@@ -37,6 +39,7 @@ class character
     control2(event)
     {
         if(event.keyCode === 37 || event.keyCode === 39){
+            document.getElementById("charImg").src="img/charCenter.png"
           clearInterval(this.moving);
           this.moving = false;
         }
@@ -48,10 +51,12 @@ class character
 
         if (direction == 39 && this.location.xPosition <  this.bordWidth - 50)
         {
+          document.getElementById("charImg").src="img/charRight.png"
           this.location.xPosition += 2;
           this.image.left = this.location.xPosition + "px";
         }
         else if(direction == 37 && this.location.xPosition > 0){
+            document.getElementById("charImg").src="img/charLeft.png"
             this.location.xPosition -= 2;
             this.image.left = this.location.xPosition + "px";
         }
@@ -79,8 +84,7 @@ class character
         //      interval2 = setInterval(moveBlocks, 300);
         this.location.yPosition += 5;
         if( this.location.yPosition > ceil && !this.falling)
-        {
-          console.log("jump finish = ", ceil);
+        {          
           clearInterval(this.jumping);
           this.jumping = false;
           this.falling = setInterval(this.fallDown.bind(this), 5);
@@ -105,14 +109,14 @@ class character
     search()
     {
         //clearInterval(interval2);
-        this.blocks = gameObj.getPos();    
+        this.blocks = gameObj.getPos();
         for(let i = 0; i < 7; i++)
         {
             //console.log("same height");
             // console.log("char = ", this.location.yPosition);
             // console.log("block = ", this.blocks[i].yObstacle);
             // console.log("height = ", this.blocks[i].height);
-            if(this.location.yPosition === this.blocks[i].yObstacle + this.blocks[i].height)
+            if(this.location.yPosition === this.blocks[i].yObstacle /*+ this.blocks[i].height*/)
             {
                 if(this.location.xPosition + 50 >= this.blocks[i].xObstacle && this.location.xPosition  <  this.blocks[i].width)
                 {

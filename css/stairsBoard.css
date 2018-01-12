@@ -4,11 +4,14 @@
   border-style: solid;
   border-width: 1px;
   border-radius: 20px;
-  margin-left:300px;
   border-color: white;
   border-color:black;
   background-image: url(../img/wood.jpg);
   display: none;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 
@@ -23,6 +26,10 @@
     border-width: 1px;
     border-radius: 20px;
     background-image: url(../img/woodpg.jpg);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 #charImg{
   position: absolute;
@@ -41,7 +48,7 @@
   background-color: red;
   background-image: url(../img/wood.jpg);
   border-style: solid;
-  border-width:1px;
+  border-width:.5px;
   border-radius: 30px;
   position: absolute;
 }

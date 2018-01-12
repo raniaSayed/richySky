@@ -8,6 +8,10 @@
     position:fixed;
     background-color:#313131;
     overflow:auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 img#closePic {
@@ -25,7 +29,7 @@ div#popupSelectPlayer {
     margin-left:400px;
     background-color: white;
     font-family:'Raleway',sans-serif;
-      border-radius: 30px;
+    border-radius: 30px;
 }
 
 h2 {
@@ -55,11 +59,8 @@ h2 {
   margin-left:80px;
 }
 #formPlayer{
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  left: 300px;
-  top: 100px;
+  width:470px;
+  height:460px;
   background-color:white;
   border-radius: 30px;
 }
@@ -69,8 +70,4 @@ button {
     height:30px;
     border-radius:3px;
     cursor:pointer
-}
-
-.charLabel{
-    font-weight: bold;
 }

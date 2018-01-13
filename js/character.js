@@ -20,7 +20,6 @@ class character
 
     initCharacter()
     {
-
         this.image.left = this.location.xPosition + "px";
         this.image.bottom = this.location.yPosition + "px";
         document.addEventListener("keydown", this.control1.bind(this));
@@ -44,7 +43,7 @@ class character
           this.moving = false;
         }
         else if(event.keyCode === 32 &&  !this.jumping && !this.falling)
-          this.jumping = setInterval(this.jump.bind(this), 5, this.location.yPosition + 200);
+          this.jumping = setInterval(this.jump.bind(this), 5, this.location.yPosition + 150);
     }
 
     move(direction) {
@@ -79,12 +78,12 @@ class character
 
     jump(ceil)
     {
-        //clearInterval(this.moveWithObstacle);
+        clearInterval(this.moveWithObstacle);
         // if(!interval2)
         //      interval2 = setInterval(moveBlocks, 300);
         this.location.yPosition += 5;
         if( this.location.yPosition > ceil && !this.falling)
-        {          
+        {
           clearInterval(this.jumping);
           this.jumping = false;
           this.falling = setInterval(this.fallDown.bind(this), 5);
@@ -108,39 +107,40 @@ class character
 
     search()
     {
-        //clearInterval(interval2);
+        gameObj.stopStairs();
         this.blocks = gameObj.getPos();
         for(let i = 0; i < 7; i++)
         {
-            //console.log("same height");
             // console.log("char = ", this.location.yPosition);
-            // console.log("block = ", this.blocks[i].yObstacle);
-            // console.log("height = ", this.blocks[i].height);
-            if(this.location.yPosition === this.blocks[i].yObstacle /*+ this.blocks[i].height*/)
+            // console.log("block = ", this.blocks[i].yObstacle)
+            if(this.location.yPosition >= this.blocks[i].yObstacle - 2 && this.location.yPosition <= this.blocks[i].yObstacle + 2)
             {
                 if(this.location.xPosition + 50 >= this.blocks[i].xObstacle && this.location.xPosition  <  this.blocks[i].width)
                 {
-                    // clearInterval(interval2);
-                    //interval2 = false;
                     clearInterval(this.falling);
                     this.falling = false;
                     this.onObstacle = true;
-                    //this.moveWithObstacle = setInterval(this.moveTogether.bind(this), 100)
+                    //gameObj.stopStairs();
+                    gameObj.moveStairs();
+                    this.moveWithObstacle = setInterval(this.moveTogether.bind(this), 10);
                     this.whichObstacle = i;
                     return;
                 }
             }
         }
-        //interval2 = setInterval(moveBlocks, 300);
+        gameObj.moveStairs();
     }
 
-    // moveTogether(){
-    //     for(let i = 0; i < blocks.length; i++)
-    //     {
-    //         blocks[i].yObstacle -= 5;
-    //         blocksTag[i].style.bottom = blocks[i].yObstacle;
-    //     }
-    //     this.location.yPosition -= 5;
-    //     this.image.bottom = this.location.yPosition + "px";
-    // }
+    moveTogether()
+    {
+        this.location.yPosition -= 1;
+        if(this.location.yPosition <=  0)
+        {
+            clearInterval(this.moveWithObstacle);
+            this.falling = false;
+            return;
+        }
+        this.image.bottom = this.location.yPosition + "px";
+    }
+
 }

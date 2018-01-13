@@ -30,7 +30,7 @@ class stairsFactory{
     let stairsHeight=[5,5,5,5,5,5,5];
     let stairHeight=0;
     let stairNum=stairsFactory.stairNum;
-    stairHeight=stairsHeight[Math.floor(stairsFactory.stairNum/100)];
+    stairHeight=stairsHeight[1/*Math.floor(stairsFactory.stairNum/100)*/];
     return stairHeight;
   }
 
@@ -69,7 +69,7 @@ class gameBoard {
    //this.stairsPosition= getStairsPosition(stairs);
    //this.charPlayer=new character("ttttt")
 
-   console.log("charPlayer")
+  // console.log("charPlayer")
    this.stairsInterval=[];
 
  }
@@ -143,7 +143,7 @@ class gameBoard {
     //  console.log(stairs.length)
       for (var i=stairs.length-1 ;i>=0;i--){
          xyPos.xPosition= parseInt(stairs[i].style.marginLeft);
-         xyPos.yPosition= boardHeight-parseInt(getComputedStyle(stairs[i]).top);
+         xyPos.yPosition= boardHeight-parseInt(getComputedStyle(stairs[i]).top);         
          width= parseInt(stairs[i].style.marginLeft)+parseInt(stairs[i].style.width);
          height= parseInt(stairs[i].style.height);
          stairsPos[sNum++]={xObstacle:xyPos.xPosition ,yObstacle:xyPos.yPosition,width:width,height:height};
@@ -163,19 +163,26 @@ class gameBoard {
 
     }
 
-   updateBoardStairs(){
-        //clear all stairs intervals
+    stopStairsInterval(){
         for(let i=0;i<this.stairsInterval.length;i++){
             clearInterval(this.stairsInterval[i]);
         }
+    }
+
+   updateBoardStairs(){
+        //clear all stairs intervals
+        this.stopStairsInterval();
         this.generateOneStair();
         this.getStairsPosition();///get new stairs Position.
         this.getStairsPosition2();
         this.stairsMove();
+        gameObj.increaseY();
+
+
 
     }
 
-  move(stair,index) {
+  move(stair, index) {
         // this.getStairsPosition2(this.stairs)
         if (this.stairsPosition[index]==550) {
           this.deleteStair(index);
@@ -191,17 +198,17 @@ class gameBoard {
 
       for(let i=0;i<this.stairs.length;i++)
       {
-        this.stairsInterval[i] = setInterval(this.move.bind(this), 20, this.stairs[i],i);
+        this.stairsInterval[i] = setInterval(this.move.bind(this), 10, this.stairs[i],i);
       }
     }
 
   startGame(){
       this.generateBoardStairs(7);
-       this.stairs = document.getElementsByClassName("stairs")
+       this.stairs = document.getElementsByClassName("stairs");
        this.getStairsPosition();
       // this.getStairsPosition2();
        this.stairsMove();//osition(stairs);
-      //  this.charPlayer=new character();
+       //this.charPlayer = new character();
     }
 
 }

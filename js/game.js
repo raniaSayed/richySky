@@ -9,4 +9,16 @@ class game
   getPos(){
     return this.gameBoardObj.getStairsPosition2();
   }
+
+  stopStairs(){
+      this.gameBoardObj.stopStairsInterval();
+  }
+
+  moveStairs(){
+      this.gameBoardObj.stairsMove();
+  }
+
+  increaseY(){
+      this.charPlayer.location.yPosition -= 9;
+  }
 }

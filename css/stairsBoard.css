@@ -52,3 +52,23 @@
   border-radius: 30px;
   position: absolute;
 }
+.coins{
+  position:absolute;
+  /*bottom: 0px;*/
+}
+.stairsParent{
+  position:absolute;
+}
+
+#player{
+  float: right;
+  margin: 30px;
+  font-weight: bold;
+  color:aliceblue;
+}
+#scoreDiv{
+  float: left;
+  margin: 30px;
+  font-weight: bold;
+  color:aliceblue;
+}

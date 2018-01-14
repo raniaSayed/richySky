@@ -64,13 +64,16 @@ class gameBoard {
  constructor(){
    this.board = document.getElementById('boardStairs');
    this.stairsPosition =[];
+   this.coinsPosition =[];
    this.stairsAtrr={};
    this.stairs = document.getElementsByClassName("stairs");
+   this.coins = document.getElementsByClassName("coins");
    //this.stairsPosition= getStairsPosition(stairs);
    //this.charPlayer=new character("ttttt")
 
   // console.log("charPlayer")
    this.stairsInterval=[];
+   this.coinsInterval=[];
 
  }
   buildStair(){
@@ -87,7 +90,26 @@ class gameBoard {
         stairHtml.style.width=stair.stairWidth+'px';
         stairHtml.style.height=stair.stairHeight+'px';
         stairHtml.style.marginLeft=stair.marginLeft+'px';
-        return stairHtml;
+        
+        let coinHtmlDiv = document.createElement('div');
+        let coinHtml = document.createElement('img');
+
+        coinHtmlDiv.setAttribute('id',stair.stairNum+"coin");
+
+        coinHtmlDiv.setAttribute('class','coins');
+
+        coinHtmlDiv.style.marginLeft=(stair.rowPos)+'px';
+        coinHtmlDiv.style.marginTop=(stair.rowPos+10)+'px';
+        coinHtml.style.width = "30px";
+        coinHtml.style.height = "30px";
+        coinHtml.style.bottom = "10px";
+        coinHtml.src ="img/coin2.png";
+
+        coinHtmlDiv.appendChild(coinHtml);
+
+
+        return [stairHtml,
+                coinHtmlDiv];
     }
 
    createHtmlSpace(){
@@ -100,21 +122,34 @@ class gameBoard {
  generateBoardStairs(num){
 
       let stair=0;
+      let coin = 0;
       let space=0;
       let lastStair=0;
+      let stairObj =0;
 
       for(let i=0;i<num;i++)
       {
-        stair=this.createHtmlStairs();
+        stairObj = this.createHtmlStairs();
+        stair=stairObj[0];
+        coin=stairObj[1];
+
         space=this.createHtmlSpace();
         lastStair=document.getElementsByClassName('stairs')[0];
         if(lastStair==undefined){
           this.board.appendChild(stair);
+          this.board.appendChild(coin);
+          this.generateCoinObj(stair.getAttribute('number'));
+
         //  console.log()
         }
         else {
-          this.board.insertBefore(space, lastStair)
-          this.board.insertBefore(stair, space)
+
+          this.board.insertBefore(space, lastStair);
+          //this.board.insertBefore(coin,space);
+          this.board.insertBefore(stair, space);
+          this.board.insertBefore(coin, lastStair);
+          this.generateCoinObj(stair.getAttribute('number'));
+
         }
       }
     }
@@ -127,6 +162,12 @@ class gameBoard {
        let stairs=this.stairs;
       for (var i=0 ;i<stairs.length;i++){
         this.stairsPosition[i]=stairs[i].getBoundingClientRect().top;
+      }
+    }
+     getCoinsPosition(){
+       let coins=this.coins;
+      for (var i=0 ;i<coins.length;i++){
+        this.coinsPosition[i]=coins[i].getBoundingClientRect().top;
       }
     }
 
@@ -156,9 +197,11 @@ class gameBoard {
    }
    deleteStair(index){
       let stair = document.getElementsByClassName('stairs')[index];
+      let coin = document.getElementsByClassName('coins')[index];
       let space = document.getElementsByClassName('space')[0];
 
       this.board.removeChild(stair);
+      this.board.removeChild(coin);
       this.board.removeChild(space);
 
     }
@@ -166,6 +209,7 @@ class gameBoard {
     stopStairsInterval(){
         for(let i=0;i<this.stairsInterval.length;i++){
             clearInterval(this.stairsInterval[i]);
+         //   clearInterval(this.coinsInterval[i]);
         }
     }
 
@@ -174,6 +218,7 @@ class gameBoard {
         this.stopStairsInterval();
         this.generateOneStair();
         this.getStairsPosition();///get new stairs Position.
+        this.getCoinsPosition();///get new stairs Position.
         this.getStairsPosition2();
         this.stairsMove();
         gameObj.increaseY();
@@ -182,7 +227,7 @@ class gameBoard {
 
     }
 
-  move(stair, index) {
+  move(stair,coin, index) {
         // this.getStairsPosition2(this.stairs)
         if (this.stairsPosition[index]==550) {
           this.deleteStair(index);
@@ -190,7 +235,9 @@ class gameBoard {
         }
         else {
           this.stairsPosition[index]+=1;
-          stair.style.top = this.stairsPosition[index] + 'px';
+          stair.style.top = this.stairsPosition[index] + 'px'; 
+       //   this.coinsPosition[index]+=1;
+        //  coin.style.top = this.coinsPosition[index] + 'px';
         }
       }
 
@@ -198,17 +245,30 @@ class gameBoard {
 
       for(let i=0;i<this.stairs.length;i++)
       {
-        this.stairsInterval[i] = setInterval(this.move.bind(this), 10, this.stairs[i],i);
+        this.stairsInterval[i] = setInterval(this.move.bind(this), 10, this.stairs[i],this.coins[i],i);
+      //  this.coinsInterval[i] = setInterval(this.move.bind(this), 10, this.coins[i],i);
       }
     }
 
   startGame(){
       this.generateBoardStairs(7);
        this.stairs = document.getElementsByClassName("stairs");
+       this.coins = document.getElementsByClassName("coins");
        this.getStairsPosition();
+       this.getCoinsPosition();
+
+       document.getElementById("player").textContent = getPlayerName();
+
       // this.getStairsPosition2();
-       this.stairsMove();//osition(stairs);
+     //  this.stairsMove();//osition(stairs);
        //this.charPlayer = new character();
+    }
+     generateCoinObj(currStairNum){
+      //create coin object
+
+        let coinObj = new Coin(null, currStairNum+"coin" , new Size(30,30) , "regular" ,10);
+        coinObj.move();
+     //   coinObj.DetectTouchIntervel();
     }
 
 }

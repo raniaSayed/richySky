@@ -5,6 +5,8 @@ class game
      this.gameBoardObj=new gameBoard();
      this.gameBoardObj.startGame();
      this.charPlayer=new character("ttttt");
+     this.player = new Player(getPlayerName());
+
   }
   getPos(){
     return this.gameBoardObj.getStairsPosition2();
@@ -20,5 +22,8 @@ class game
 
   increaseY(){
       this.charPlayer.location.yPosition -= 9;
+  }
+  get Player(){
+    return this.player;
   }
 }

@@ -179,9 +179,9 @@ class gameBoard {
         this.getStairsPosition();///get new stairs Position.
         this.getStairsPosition2();
         this.stairsMove();
-        gameObj.increaseY();
-
-
+        if(gameObj.charOnStair){            
+            gameObj.increaseY();
+        }
 
     }
 

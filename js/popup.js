@@ -57,15 +57,6 @@ function closeFn(){
    div_hide("playersPage");
 }
 
-let helpBtnMenue=document.getElementById("helpBtn");
-helpBtnMenue.addEventListener('click',function (){
-  div_show("helpPage");
-});
-
-let closeBtn2=document.getElementById("closePic2");
-closeBtn2.addEventListener('click', function (){
-  div_hide("helpPage");
-});
 
 let playerChar=null;
 let playerName=null;

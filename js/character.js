@@ -79,8 +79,6 @@ class character
     jump(ceil)
     {
         clearInterval(this.moveWithObstacle);
-        // if(!interval2)
-        //      interval2 = setInterval(moveBlocks, 300);
         this.location.yPosition += 5;
         if( this.location.yPosition > ceil && !this.falling)
         {
@@ -107,7 +105,7 @@ class character
 
     search()
     {
-        gameObj.stopStairs();
+        //gameObj.stopStairs();
         this.blocks = gameObj.getPos();
         for(let i = 0; i < 7; i++)
         {
@@ -120,15 +118,16 @@ class character
                     clearInterval(this.falling);
                     this.falling = false;
                     this.onObstacle = true;
-                    //gameObj.stopStairs();
+                    gameObj.stopStairs();
                     gameObj.moveStairs();
+                    gameObj.charOnStair = true;
                     this.moveWithObstacle = setInterval(this.moveTogether.bind(this), 10);
                     this.whichObstacle = i;
                     return;
                 }
             }
         }
-        gameObj.moveStairs();
+        //gameObj.moveStairs();
     }
 
     moveTogether()
@@ -137,7 +136,7 @@ class character
         if(this.location.yPosition <=  0)
         {
             clearInterval(this.moveWithObstacle);
-            this.falling = false;
+            gameObj.charOnStair = false;
             return;
         }
         this.image.bottom = this.location.yPosition + "px";

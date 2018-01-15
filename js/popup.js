@@ -28,6 +28,11 @@ function getPlayerName(){
   return name;
 }
 
+function getPlayer()
+{
+  
+}
+
 let playBtnMenue=document.getElementById("playBtn");
 playBtnMenue.addEventListener('click',openPopup);
 function openPopup(){
@@ -39,6 +44,7 @@ playBtn.addEventListener('click',clkFn);
 function clkFn(){
        playerChar=selectPlayer();
        playerName=getPlayerName();
+       playerImage = "img/"+"happy"+selectPlayer()+".jpg";
        if(playerChar!=null &&playerName!=null)
        {
           div_hide("playersPage");
@@ -56,7 +62,6 @@ closeBtn.addEventListener('click',closeFn);
 function closeFn(){
    div_hide("playersPage");
 }
-
 
 let playerChar=null;
 let playerName=null;

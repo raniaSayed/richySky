@@ -260,7 +260,8 @@ class gameBoard {
        this.getStairsPosition();
        this.getCoinsPosition();
 
-       document.getElementById("player").textContent = getPlayerName();
+       document.getElementById("player").textContent = playerName;
+       document.getElementById("playerImg").src = playerImage;
 
       // this.getStairsPosition2();
      //  this.stairsMove();//osition(stairs);

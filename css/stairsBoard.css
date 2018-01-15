@@ -66,6 +66,15 @@
   font-weight: bold;
   color:aliceblue;
 }
+#playerImg{
+  float: right;
+  margin: 30px;
+  margin-top:56px;
+  margin-right: -100px;
+  font-weight: bold;
+  color:aliceblue;
+  height: 100px;
+}
 #scoreDiv{
   float: left;
   margin: 30px;

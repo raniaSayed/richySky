@@ -22,8 +22,8 @@ function selectPlayer(){
 function getPlayerName(){
   let name=null;
 
-     if(document.getElementById('name').value!="")
-        name=document.getElementById('name').value;
+     if(document.getElementById('playerName').value!="")
+        name=document.getElementById('playerName').value;
 
   return name;
 }
@@ -56,6 +56,7 @@ closeBtn.addEventListener('click',closeFn);
 function closeFn(){
    div_hide("playersPage");
 }
+
 
 let playerChar=null;
 let playerName=null;

@@ -33,10 +33,10 @@
               <div  id="formPlayer">
                       <img id="closePic" src="img/close.jpg">
                       <h2>Select Player</h2>
-                      <img id="character1" width=200 height=300 src="img/temPoppy.png">
-                      <img id="character2" width=200 height=300 src="img/happyBranch.jpg">
+                      <img width=200 height=300 src="img/temPoppy.png">
+                      <img  width=200 height=300 src="img/happyBranch.jpg">
 
-                     <div id="radioButton">
+                    <div id="radioButton">
                          <input id="Poppy" type="radio" name="player" value="Poppy" >
                          <label class="charLabel" for="Poppy" style="color:#9e0c57;" >Poppy</label>
                          &nbsp;   &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
@@ -44,23 +44,32 @@
                          <input id="Branch" type="radio" name="player" value="Branch">
                          <label class="charLabel" for="Branch" style="color:blue;" >Branch</label>
                     </div>
-                      <br> <b style="color:#4c0a10;">&nbsp;&nbsp; Your name: <input type="text" id="name" value="X Player">
+                      <br> <b style="color:#4c0a10;">&nbsp;&nbsp; Your name: <input type="text" id="playerName" value="X Player">
                       <button id="submit">Play</button></b>
                 </div>
             </div>
               <!-- Popup Div Ends Here -->
         </div>
 
-        <div id="playingBoard">
+         <div id="playingBoard">
+        <div id="player" >
+          Player Name
+        </div>
+        <div id="scoreDiv">
+           <label id="charLabel">Score</label><div id="score"></div>
+        </div>
           <div id="boardStairs">
-
+            <img id="charImg" src="img/charCenter.png" >
           </div>
         </div>
 </body>
-    <script src="js/position.js"></script>
-    <script src="js/coinClass.js"></script>
     <script src="js/startProg.js"> </script>
     <script src="js/popup.js"> </script>
+    <script src="js/position.js"></script>
+    <script src="js/coinClass.js"> </script>
     <script src="js/stairsBoard.js"> </script>
+    <script src="js/character.js"> </script>
+    <script src="js/player.js"> </script>
+    <script src="js/game.js"> </script>
 
 </html>

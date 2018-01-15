@@ -5,13 +5,13 @@ class Player{
  this.name=name;
  this.calScore();
  this.numCoins=0;
- this.character=new Character();
- this.character.name=NULL;
- this.character.characterImageId=NULL;
- this.character.xLow=0;
- this.character.xHigh=0;
- this.character.height=0+'px';
- this.character.width=0+'px';
+ // this.character=new Character();
+ // this.character.name=NULL;
+ // this.character.characterImageId=NULL;
+ // this.character.xLow=0;
+ // this.character.xHigh=0;
+ // this.character.height=0+'px';
+ // this.character.width=0+'px';
  }
 
 set name(n)
@@ -36,6 +36,7 @@ get numCoins()
 calCoins()
 {
   this.numCoins++;
+    document.getElementById("score").textContent = this.calScore();
 }
 
 calScore()

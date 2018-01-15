@@ -5,57 +5,76 @@ class Size{
     }
 }
 class Coin {
-	constructor(position ,id, size , type ,score){
+    constructor(position ,id, size , type ,score){
         this.position = position;
         this.id = id;
-		this.size = size;
-		this.type = type;
-		this.score = score;
+        this.size = size;
+        this.type = type;
+        this.score = score;
+        this.regularcoin = document.getElementById(this.id);
+
         //this.coinNode =  this.generateCoinNode();
-	}
+    }
     
     /*
     *       move coin in vertically 
     *       @return intervalID
     */
     move(){
-        var rotate  = 0;
-        var regularcoin = document.getElementById(this.id);
-
+        let rotate  = 0;
+        let _this = this;
         function moveCoinNode() {
             rotate += 20;
-            regularcoin.style.WebkitTransform = "rotatey("+rotate+"deg)"; 
+            _this.regularcoin.style.WebkitTransform = "rotatey("+rotate+"deg)";
+            _this.detectTouch(_this); 
         };
         var intervalID = setInterval(moveCoinNode, 100);
         return intervalID;
     }
 
     /*
-    *       stop coin movement
+    *       hide coin
     *       @param intervalID
     */
-    stopMovement(intervalID){
-         window.clearInterval(intervalID);
-         var regularcoin = document.getElementById(this.id);
-         regularcoin.style.WebkitTransform = "rotate(0deg)";
+    hide(intervalID){
+         //var regularcoin = document.getElementById(this.id);
+         this.regularcoin.style.display = "none";
+         console.log("hide")
     }
 
-//     generateCoinNode(){
-// //        let div= document.createElement('div');
-//         //div.setAttribute('class','coins');
+    detectTouch(_this,score){
+        let characterBottom = document.getElementById("charImg").getBoundingClientRect().bottom;
+        let characterLeft = document.getElementById("charImg").getBoundingClientRect().left;
+        
+        let coinBottom = _this.regularcoin.getBoundingClientRect().bottom;
+        let coinLeft = _this.regularcoin.getBoundingClientRect().left;
+       
+        if(
+            characterBottom - coinBottom <= 90
+            && Math.abs(characterLeft - coinLeft <= 80)
+        ){
+            console.log("score"+_this.score)
+            console.log("win");
+            _this.hide();
+            gameObj.Player.calCoins();
 
-//         let coinNode = document.createElement("img");
-//         coinNode.setAttribute('class','coins');
-//         coinNode.src= this.type;//"coin.png"
-//         coinNode.style.width=this.size.weigth; //"30px";
-//       //  coinNode.style.position="absolute";
-//         coinNode.style.bottom = this.position.x+"px"; //Number(positionFromBottom +60)+ "px";
-//         coinNode.style.left  = this.position.y+"px"; //(x+100) + "px";
-//      //   move(coinNode);
-//         return coinNode;
-//     }
-	
-	set id(id)
+        }
+    }
+
+    /*
+     * detect touch of coin with character
+     *
+    */
+    DetectTouchIntervel(){
+        //height of character = 60 , coin 30
+        //width of char = 50 ,coin 30
+     //   let regularcoin = document.getElementById(this.id);
+        let _this = this;
+        var intervalID = setInterval(_this.detectTouch(_this),10);
+    }
+
+    
+    set id(id)
     {
         this._id= id;
     }
@@ -79,9 +98,12 @@ class Coin {
     {
         this._score = score;
     }
+    set regularcoin(regularcoin){
+        this._regularcoin = regularcoin;
 
+    }
 
-	get position()
+    get position()
     {
         return this._position ;
     }
@@ -98,13 +120,27 @@ class Coin {
 
     get score()
     {
+        console.log(this._score)
         return this._score;
     }
+
+    get regularcoin(){
+        return this._regularcoin ;
+    }
+
     get id()
     {
         return this._id;
     }
-
+/*
+    *       stop coin movement
+    *       @param intervalID
+    */
+    // stopMovement(intervalID){
+    //      window.clearInterval(intervalID);
+    //  //    var regularcoin = document.getElementById(this.id);
+    //      this.regularcoin.style.WebkitTransform = "rotate(0deg)";
+    // }
     
 }
 

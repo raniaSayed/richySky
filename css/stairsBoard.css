@@ -1,6 +1,6 @@
 #playingBoard {
-  width: 730px;
-  height:585px;
+  width: 70%;
+  height:100%;
   border-style: solid;
   border-width: 1px;
   border-radius: 20px;
@@ -19,8 +19,8 @@
     position: relative;
     border-color: black;
     background-color: black;
-    width: 500px;
-    height:580px;
+    width: 70%;
+    height:100%;
     margin: auto;
     border-style: solid;
     border-width: 1px;
@@ -34,8 +34,8 @@
 #charImg{
   position: absolute;
   bottom: 0;
-  width : 50;
-  height : 60;
+  width : 45;
+  height : 55;
 
 }
 .space{

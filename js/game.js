@@ -5,6 +5,7 @@ class game
      this.gameBoardObj=new gameBoard();
      this.gameBoardObj.startGame();
      this.charPlayer=new character("ttttt");
+     this.charOnStair = false;
   }
   getPos(){
     return this.gameBoardObj.getStairsPosition2();

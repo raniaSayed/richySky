@@ -143,7 +143,7 @@ class gameBoard {
     //  console.log(stairs.length)
       for (var i=stairs.length-1 ;i>=0;i--){
          xyPos.xPosition= parseInt(stairs[i].style.marginLeft);
-         xyPos.yPosition= boardHeight-parseInt(getComputedStyle(stairs[i]).top);         
+         xyPos.yPosition= boardHeight-parseInt(getComputedStyle(stairs[i]).top);
          width= parseInt(stairs[i].style.marginLeft)+parseInt(stairs[i].style.width);
          height= parseInt(stairs[i].style.height);
          stairsPos[sNum++]={xObstacle:xyPos.xPosition ,yObstacle:xyPos.yPosition,width:width,height:height};
@@ -176,9 +176,9 @@ class gameBoard {
         this.getStairsPosition();///get new stairs Position.
         this.getStairsPosition2();
         this.stairsMove();
-        gameObj.increaseY();
-
-
+        if(gameObj.charOnStair){            
+            gameObj.increaseY();
+        }
 
     }
 

@@ -21,9 +21,9 @@
     <div id="menuePage">
       <div id="div_buttons">
          <button id="playBtn" class="startPageButton"> PLAY </button><br>
-         <button class="startPageButton">  HELP </button><br>
-         <button class="startPageButton"> SCORE </button><br>
-         <button class="startPageButton"> EXIT </button><br>
+         <button id="helpBtn" class="startPageButton">  HELP </button><br>
+         <button id="scoreBtn" class="startPageButton"> SCORE </button><br>
+         <button onclick="window.close()" class="startPageButton"> EXIT </button><br>
        </div>
       </div>
 
@@ -50,6 +50,13 @@
                 </div>
             </div>
               <!-- Popup Div Ends Here -->
+        </div>
+
+        <div id="helpPage">
+          <img id="closePic2" src="img/close.jpg">
+          <p>Hi there! Your goal is to reach the sky!</p>
+          <p>If you fall down, you have to restart again.</p>
+          <p>Use arrow keys to move and spacebar to jump.</p>
         </div>
 
         <div id="playingBoard">

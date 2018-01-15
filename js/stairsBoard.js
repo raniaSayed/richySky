@@ -12,22 +12,23 @@ class stairsFactory{
 
   get width(){
 
+    let window_width=(window.innerWidth*70)/100;
     let stairNum=stairsFactory.stairNum;
     let stairWidth=0;
     if(stairNum%50==0)
       {
-        stairWidth=495;
+        stairWidth=(window_width*70)/100-13;
       }
       else{
-        let max=300;
-        let min=120;
+        let max=window_width/4 ;
+        let min=window_width/6;
         stairWidth= Math.floor(Math.random() * (max - min + 1) ) + min;
       }
      return stairWidth;
   }
 
   get height(){
-    let stairsHeight=[5,5,5,5,5,5,5];
+    let stairsHeight=[30,15,5,5,5,5,5];
     let stairHeight=0;
     let stairNum=stairsFactory.stairNum;
     stairHeight=stairsHeight[1/*Math.floor(stairsFactory.stairNum/100)*/];
@@ -35,6 +36,7 @@ class stairsFactory{
   }
 
   get rowPos(){//margin-left
+    let window_width=(window.innerWidth*70)/100;
     let stairNum=stairsFactory.stairNum;
     let stairPos=0;
     if(stairNum%50==0)
@@ -42,7 +44,7 @@ class stairsFactory{
         stairPos=0;
       }
       else{
-        let max=195;
+        let max=window_width/3;
         let min=0;
         stairPos= Math.floor(Math.random() * (max - min + 1) ) + min;
       }
@@ -59,6 +61,7 @@ class stairsFactory{
   }
 }//end stairsFactory class
 //////////////////////////////////////////////////////////////////////////////////
+
 class gameBoard {
 
  constructor(){
